@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'github-users-search-test';
+  users: any[] = [];
+
+  onUserAdd(user: any): void {
+    if (!this.users.find(({login}) => login === user.login)) {
+      this.users.push(user);
+    }
+  }
 }

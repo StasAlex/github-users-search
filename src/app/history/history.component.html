@@ -1,0 +1,17 @@
+<div class="history-outer">
+  <div class="noSearched" *ngIf="!users.length">There is no searched users now </div>
+  <div class="history" *ngIf="users.length">
+    <div class="history-title">History of successful requests</div>
+    <div class="history-item" *ngFor="let user of users">
+      <div class="item">
+        <div class="avatar-mini">
+          <img src="{{user.avatar_url}}" alt="Photo">
+        </div>
+        <div class="login">Login: {{user.login}}</div>
+        <div class="githubLink">
+          <a class="miniLink" href="{{user.html_url}}" target="_blank">Open Account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

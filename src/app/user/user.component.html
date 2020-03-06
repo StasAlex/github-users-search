@@ -1,48 +1,21 @@
-<div class="container">
+<form [formGroup]="userForm">
+  <mat-form-field class="form-field">
+    <input matInput type="text" placeholder="Search for  Github user" formControlName="userName">
+  </mat-form-field>
+</form>
 
-  <div class="search-outer">
+<mat-progress-bar *ngIf="loading" mode="indeterminate" value="50"></mat-progress-bar>
 
-    <form [formGroup]="userForm">
-      <mat-form-field class="form-field">
-        <input matInput type="text" placeholder="Search for  Github user" formControlName="userName">
-      </mat-form-field>
-    </form>
+<ng-container *ngIf="(user$ | async) as user">
+  <mat-card class="user-card">
+    <mat-card-header>
+      <mat-card-title>{{user.login}}</mat-card-title>
+      <mat-card-subtitle>{{user.html_url}}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="user.email">{{user.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="card-image" src="{{user.avatar_url}}" alt="Photo">
+    <a class="link" href="{{user.html_url}}" target="_blank">Open Github Account</a>
+  </mat-card>
+</ng-container>
 
-    <mat-progress-bar *ngIf="loading" mode="indeterminate" value="50"></mat-progress-bar>
-
-    <ng-container *ngIf="(user$ | async) as user">
-      <mat-card class="user-card">
-        <mat-card-header>
-          <mat-card-title>{{(user | json).login}}</mat-card-title>
-          <mat-card-subtitle>{{user.html_url}}</mat-card-subtitle>
-          <mat-card-subtitle *ngIf="user.email">{{user.email}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image class="card-image" src="{{user.avatar_url}}" alt="Photo">
-        <a class="link" href="{{user.html_url}}" target="_blank">Open Github Account</a>
-      </mat-card>
-    </ng-container>
-
-    <div class="noSearched" *ngIf="!history.length">There is no searched users</div>
-
-    <div class="noUser" *ngIf="noUser">No user with such login. Try to search again...</div>
-
-  </div>
-
- <ng-container class="history-outer">
-    <div class="history" *ngIf="history.length">
-      <div class="history-title">History of successful requests</div>
-      <div class="history-item" *ngFor="let item of history">
-        <div class="item">
-          <div class="avatar-mini">
-            <img src="{{item.avatar_url}}" alt="Photo">
-          </div>
-          <div class="login">Login: {{item.login}}</div>
-          <div class="githubLink">
-            <a class="miniLink" href="{{item.html_url}}" target="_blank">Open Account</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-
-</div>
+<div class="noUser" *ngIf="noUser">No user with such login. Try to search again...</div>

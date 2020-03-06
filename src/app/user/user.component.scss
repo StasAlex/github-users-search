@@ -1,27 +1,7 @@
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: left;
-  align-items: flex-start;
-  margin-top: 50px;
-}
-.search-outer{
-  display: flex;
-  flex-basis: 50%;
-  margin-left: 50px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
 .user-card {
-  max-width: 200px;
+  max-width: 300px;
   text-align: center;
 }
-// .card-image{
-//   ma
-// }
-
 .link {
   padding: 10px 20px;
   border-radius: 5px;
@@ -39,55 +19,4 @@
   color:red;
   font-style: italic;
   font-size: large;
-}
-.noSearched{
-  color: grey;
-  font-size: 16px;
-}
-.history{
-  width: 100%;
-  padding: 0 20px;
-}
-.history-title{
-  margin-top: 30px;
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-.item{
-  display: flex;
-  min-width: 300px;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  margin-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  .login{
-    flex-grow: 1;
-    text-align: center;
-  }
-}
-.avatar-mini{
-  margin-right: 20px;
-  img{
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-  }
-}
-
-.miniLink{
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: grey;
-  background-color: #3e51b5;
-  text-decoration: none;
-  margin-left: 10px;
-
-  &:hover {
-    color: white;
-  }
-}
-.history-outer{
-  flex-basis: 50%;
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { EventEmitter } from 'protractor';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-history',
@@ -6,12 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
+  @Input() users: [];
 
-  @Input() history: [];
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, pluck, tap, finalize, map, filter } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, pluck, tap, finalize, filter, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',
@@ -10,6 +10,7 @@ import { debounceTime, distinctUntilChanged, switchMap, pluck, tap, finalize, ma
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  @Output() user: EventEmitter<any> = new EventEmitter<any>();
   userForm = new FormGroup({
     userName: new FormControl('')
   });
@@ -17,7 +18,6 @@ export class UserComponent implements OnInit {
   loading = false;
   user$: Observable<any>;
   noUser: boolean;
-  history = [];
 
   constructor(private data: DataService) {}
 
@@ -37,15 +37,17 @@ export class UserComponent implements OnInit {
       }),
       switchMap((userName: string) =>
         this.data.getGitUser(userName).pipe(
+          catchError(() => of(null)),
           tap(user => {
             if (user) {
               this.noUser = false;
-              this.history.push(user);
-             } else { this.noUser = true; }
+              this.user.emit(user);
+            } else {
+              this.noUser = true;
+            }
           }),
           finalize(() => {
             this.loading = false;
-            console.log(this.history);
           })
         )
       )
